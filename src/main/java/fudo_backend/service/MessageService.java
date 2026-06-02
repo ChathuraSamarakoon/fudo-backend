@@ -21,6 +21,7 @@ public class MessageService {
 
 
     public Message saveMessage(Message message) {
+        message.setIsRead(false);
         return messageRepository.save(message);
     }
 
