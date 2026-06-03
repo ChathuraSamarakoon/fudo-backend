@@ -28,7 +28,7 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Role role; // ADMIN, CUSTOMER
+    private Role role;
 
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;

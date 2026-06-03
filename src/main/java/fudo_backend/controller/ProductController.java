@@ -24,7 +24,7 @@ public class ProductController {
     @PostMapping
     public ResponseEntity<Product> addProduct(@RequestBody Product product) {
         Product savedProduct = productService.addProduct(product);
-        // 🚀 සාර්ථකව සේව් වුණාම 201 CREATED Status එක යවනවා
+
         return ResponseEntity.status(HttpStatus.CREATED).body(savedProduct);
     }
 

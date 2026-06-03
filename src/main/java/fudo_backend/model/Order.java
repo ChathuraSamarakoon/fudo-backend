@@ -32,7 +32,7 @@ public class Order {
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 
-    // අලුතෙන් එකතු කළ කොටස
+
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonManagedReference
     private List<OrderItem> orderItems;
