@@ -1,5 +1,6 @@
 package fudo_backend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,6 +19,7 @@ public class OrderItem {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id", nullable = false)
+    @JsonBackReference // Infinite loop එකක් එන්නේ නැතුව ඉන්න[cite: 3]
     private Order order;
 
     @ManyToOne(fetch = FetchType.LAZY)

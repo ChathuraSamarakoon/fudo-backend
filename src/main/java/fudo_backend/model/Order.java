@@ -1,8 +1,10 @@
 package fudo_backend.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "orders")
@@ -30,14 +32,14 @@ public class Order {
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 
+    // අලුතෙන් එකතු කළ කොටස
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonManagedReference
+    private List<OrderItem> orderItems;
+
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
     }
 }
-
-enum OrderStatus {
-    PENDING, PREPARING, COMPLETED, CANCELLED
-}
-
 

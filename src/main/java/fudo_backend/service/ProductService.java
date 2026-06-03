@@ -18,28 +18,35 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-
     public Product addProduct(Product product) {
         return productRepository.save(product);
     }
-
 
     public List<Product> getAllProducts() {
         return productRepository.findAll();
     }
 
-
     public Optional<Product> getProductById(Long id) {
         return productRepository.findById(id);
     }
-
 
     public List<Product> getProductsByCategory(String category) {
         return productRepository.findByCategory(category);
     }
 
-
     public void deleteProduct(Long id) {
         productRepository.deleteById(id);
+    }
+
+
+    public Product updateProduct(Long id, Product updatedProduct) {
+        return productRepository.findById(id).map(existingProduct -> {
+            existingProduct.setName(updatedProduct.getName());
+            existingProduct.setDescription(updatedProduct.getDescription());
+            existingProduct.setPrice(updatedProduct.getPrice());
+            existingProduct.setCategory(updatedProduct.getCategory());
+            existingProduct.setImageUrl(updatedProduct.getImageUrl());
+            return productRepository.save(existingProduct);
+        }).orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
     }
 }
